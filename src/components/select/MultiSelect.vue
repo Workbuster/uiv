@@ -50,10 +50,11 @@
             @mouseenter="currentActive=-1"
             style="outline: 0">
             <a role="button" v-if="isItemSelected(_item)" style="outline: 0">
-              <b>{{_item[labelKey]}}</b>
               <span v-if="selectedIcon" :class="selectedIconClasses"></span>
+              <b>{{_item[labelKey]}}</b>
             </a>
             <a role="button" v-else style="outline: 0">
+              <span v-if="unselectedIcon" :class="unselectedIconClasses"></span>
               <span>{{_item[labelKey]}}</span>
             </a>
           </li>
@@ -128,6 +129,10 @@
         type: String,
         default: 'glyphicon glyphicon-ok'
       },
+      unselectedIcon: {
+        type: String,
+        default: 'glyphicon glyphicon-ok'
+      },
       itemSelectedClass: String
     },
     data () {
@@ -186,8 +191,13 @@
       },
       selectedIconClasses () {
         return {
-          [this.selectedIcon]: true,
-          'pull-right': true
+          [this.selectedIcon]: true
+        }
+      },
+      unselectedIconClasses () {
+        return {
+          [this.unselectedIcon]: true,
+          'text-muted': true
         }
       },
       selectTextClasses () {
